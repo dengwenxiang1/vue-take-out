@@ -1,0 +1,59 @@
+<template>
+ <div class="cartcontrol">
+     <transition name="move">
+    <div class="iconfont icon-jianhao1"  v-if="food.count" @click.stop="updateFoodCount(false)"></div>
+     </transition>
+   <div class="cart-count" v-if="food.count">{{food.count}}</div>
+   <div class="iconfont icon-jiahao2" @click.stop="updateFoodCount(true)"></div>
+ </div>
+</template>
+<script>
+export default ({
+    props: {
+      food: Object
+    },
+    methods: {
+        updateFoodCount (isAdd) {
+          this.$store.dispatch('updateFoodCount',{isAdd,food:this.food})
+        }
+    },
+})
+</script>
+<style lang="stylus" rel="stylesheet/stylus">
+  @import "../../common/stylus/mixins.styl"
+  .cartcontrol
+    font-size: 0
+    .cart-decrease
+      display: inline-block
+      padding: 6px
+      line-height: 24px
+      font-size: 24px
+      color: limegreen
+
+    .icon-jianhao1
+      display: inline-block
+      padding 6px
+      line-height 24px
+      font-size 24px
+      color limegreen
+      &.move-enter-active, &.move-leave-active
+        transition all .3s
+      &.move-enter, &.move-leave-to
+        opacity 0
+        transform translateX(15px) rotate(180deg)
+    .cart-count
+      display: inline-block
+      vertical-align: top
+      width: 12px
+      padding-top: 6px
+      line-height: 24px
+      text-align: center
+      font-size: 10px
+      color: limegreen
+    .icon-jiahao2
+      display: inline-block
+      padding: 6px
+      line-height: 24px
+      font-size: 24px
+      color limegreen
+</style>

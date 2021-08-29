@@ -17,9 +17,9 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../common/stylus/mixins.styl'
+@import "../../common/stylus/mixins.styl"
 .header {
-  background-color: #02a774;
+  background-color: pink ;
   position: fixed;
   z-index: 100;
   left: 0;

@@ -4,15 +4,15 @@
     <section class="profile-number">
       <router-link to="login"  class="profile-link">
         <div class="profil_image">
-          <i class="iconfont icon-ziyuanxhdpi"></i>
+          <i class="iconfont  "></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录 | 注册</p>
+          <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name || '登录/注册'}}</p>
           <p>
             <span class="user-icon">
               <i class="iconfont  icon-shouji"></i>
             </span>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
+            <span class="icon-mobile-number">{{userInfo.phone || '暂无绑定手机号'}}</span>
           </p>
         </div>
       </router-link>
@@ -86,57 +86,49 @@
       </a>
     </section>
     <section class="profile_my_order border-1px">
-      <mt-button type="danger" style="width: 100%" >退出登陆</mt-button>
+      <mt-button type="danger" style="width: 100%" v-if="userInfo._id" @click="logout">退出登陆</mt-button>
     </section>
   </section>
 </template>
 <script>
+import {MessageBox,Toast} from 'mint-ui'
+import {mapState} from 'vuex'
 import HeaderTop from '../../compoments/Header.Top/HeaderTop.vue'
 export default {
+  computed: {
+    ...mapState(['userInfo'])
+  },
+  methods: {
+    logout () {
+      MessageBox.confirm('确认退出码 ?').then(
+        action => {
+          //请求退出
+          this.$store.dispatch('logout')
+          Toast('退出账号成功')
+        },
+        action => {
+          console.log('点击了取消');
+        }
+      )
+    }
+  },
   components: {
     HeaderTop
   }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-  @import "../../common/stylus/mixins.styl"
+@import "../../common/stylus/mixins.styl"
   .profile
     width 100%
     overflow hidden // 不会跟着别的页面滑动
-    .header //头部公共css
-      background-color #02a774
-      position fixed
-      z-index 100
-      left 0
-      top 0
-      width 100%
-      height 45px
-      .header_search
-        position absolute
-        left 15px
-        top 50%
-        transform translateY(-50%)
-        width 10%
-        height 50%
-        .iconfont
-          font-size 22px
-          color #fff
-      .header_title
-        position absolute
-        top 50%
-        left 50%
-        transform translate(-50%, -50%)
-        width 30%
-        color #fff
-        font-size 22px
-        text-align center
     .profile-number
       margin-top 45.5px
       .profile-link
         clearFix()
         position relative
         display block
-        background #02a774
+        background pink 
         padding 20px 10px
         .profile_image
           float left

@@ -6,13 +6,16 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import FootefGuied from './compoments/FooterGuide/FootefGuied.vue'
-// import {reqFoodTypes} from './api/ajax.js/ajax'
 export default {
-// async mounted () {
-// const result = await reqFoodTypes()
-// console.log(result)
-// },
+  mounted () {
+    this.getAddress()
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(['getAddress','getUserInfo'])
+  },
   components: {
     FootefGuied
   }

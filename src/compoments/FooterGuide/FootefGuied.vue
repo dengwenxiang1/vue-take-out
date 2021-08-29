@@ -55,7 +55,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-@import '../../common/stylus/mixins.styl';
+@import "../../common/stylus/mixins.styl"
 .footer_guide {
   // 顶部有白色的边框
   top-border-1px(#e4e4e4);
